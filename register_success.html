@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Successful</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="success-container">
+
+        <div class="logo">✈</div>
+
+        <h1>Account Created</h1>
+
+        <p class="subtitle">
+            Welcome, <strong>{{ username }}</strong>! Your account is ready.
+        </p>
+
+        <div class="info">
+            <p>You can now log in and book your next flight.</p>
+        </div>
+
+        <div class="buttons">
+            <a href="/login" class="button-primary">Go to Login</a>
+            <a href="/" class="button-primary">Home</a>
+        </div>
+
+    </div>
+
+</body>
+
+</html>
