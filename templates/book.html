@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Airline Booking</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="container">
+    <div class="booking-box">
+        <div class="booking-header">
+            <div>
+                <p class="eyebrow">Flight Selection</p>
+                <h1>Choose Your Next Flight</h1>
+                <p class="subtitle">Book a seat on one of our freshly added routes.</p>
+            </div>
+            <a href="{{ url_for('logout') }}" class="button-secondary">Logout</a>
+        </div>
+
+        {% if error %}
+            <p class="error">{{ error }}</p>
+        {% endif %}
+
+        <form action="/book" method="POST" class="booking-form">
+            {% if flights %}
+                <p style="color: #e1efff; margin-bottom: 16px; font-size: 14px;">Select a flight to continue:</p>
+                <div class="flight-grid">
+                    {% for flight in flights %}
+                        <div class="flight-card-wrapper">
+                            <input
+                                type="radio"
+                                id="flight_{{ loop.index }}"
+                                name="flight_name"
+                                value="{{ flight.flight_name }}"
+                                required
+                            >
+                            <label for="flight_{{ loop.index }}" class="flight-card">
+                                <div class="flight-card-content">
+                                    <div>
+                                        <div class="flight-name">{{ flight.flight_name }}</div>
+                                        <div class="flight-route">{{ flight.source }} → {{ flight.destination }}</div>
+                                    </div>
+                                    <div class="flight-meta">
+                                        <span class="flight-seat">{{ flight.seats }} seats left</span>
+                                    </div>
+                                </div>
+                            </label>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="flight-alert">
+                    No flights are available right now. Please try again later.
+                </div>
+            {% endif %}
+
+            <div class="input-group">
+                <label for="name">Passenger Name</label>
+                <input type="text" id="name" name="name" placeholder="Passenger name" required>
+            </div>
+
+            <button type="submit" class="login-btn">Book Ticket</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>
